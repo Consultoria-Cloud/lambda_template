@@ -29,7 +29,10 @@ jobs:
     - name: Initialize Terraform
       run: |
         cd terraform
-        terraform init -backend-config=dev.tfbackend
+        git config --get remote.origin.url
+        repo_url=$(git config --get remote.origin.url)
+        repo_name=$(basename -s .git "$repo_url")
+        terraform init -backend-config=bucket=\"${{ github.ref_name }}miia-terraform-tfstate\" -backend-config=\"key=lambda/$repo_url.tfstate\"
 
     - name: Plan Terraform ${{ github.ref_name }} environment
       run: |
