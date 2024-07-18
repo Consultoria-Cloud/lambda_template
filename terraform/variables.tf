@@ -6,7 +6,7 @@ variable "github_repo" {
 variable "lambda_handler" {
   description = "O handler da Lambda"
   type        = string
-  default     = "index.handler"
+  default     = "lambda_function.lambda_handler"
 }
 
 variable "lambda_runtime" {
